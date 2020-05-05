@@ -1,0 +1,109 @@
+<div class="container w0">
+    <div class="col-sm-offset-5 mt-3" style="font-family: 'Calibri Light';">
+      <h3 align="center">User Registration</h3><hr>
+  
+      <form class="col-lg-5" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+        <div class="md-form">
+          <input type="text" class="form-control" id="fname" formControlName="fname">
+          <label for="fname">First Name<span class="text-danger">*</span></label>
+          <div *ngIf="f.fname.touched && f.fname.invalid" class="alert alert-danger">
+            <div *ngIf="f.fname.errors.required">First Name is required.</div>
+            <div *ngIf="f.fname.errors.minlength">First Name should be 3 character.</div>
+          </div>
+        </div>
+        <div class="md-form">
+          <input type="text" class="form-control" id="lname" formControlName="lname">
+          <label for="lastname">Last Name<span class="text-danger">*</span></label>
+          <div *ngIf="f.lname.touched && f.lname.invalid" class="alert alert-danger">
+            <div *ngIf="f.lname.errors.required">Last Name is required.</div>
+          </div>
+        </div>
+        <div class="md-form">
+          <input type="text" class="form-control" id="bunit" formControlName="bunit">
+          <label for="bunit">Business Unit<span class="text-danger">*</span></label>
+          <div *ngIf="f.bunit.touched && f.bunit.invalid" class="alert alert-danger">
+            <div *ngIf="f.bunit.errors.required">Business Unit is required.</div>
+          </div>
+  
+        </div>
+        <div class="md-form">
+          <input type="text" class="form-control" id="title" formControlName="title">
+          <label for="title">Title<span class="text-danger">*</span></label>
+          <div *ngIf="f.title.touched && f.title.invalid" class="alert alert-danger">
+            <div *ngIf="f.title.errors.required">Title is required.</div>
+          </div>
+  
+        </div>
+        <div class="md-form">
+          <input type="email" class="form-control" id="email" formControlName="email">
+          <label for="email">Email<span class="text-danger">*</span></label>
+          <div *ngIf="f.email.touched && f.email.invalid" class="alert alert-danger">
+            <div *ngIf="f.email.errors.required">Email is required.</div>
+            <div *ngIf="f.email.errors.emailDomain">Please, enter valid email address in the format "xyz@nagarro.com".</div>
+          </div>
+  
+        </div>
+        <div class="md-form">
+          <input type="tel" class="form-control" id="telephone" formControlName="tel">
+          <label for="telephone">Telephone<span class="text-danger">*</span></label>
+          <div *ngIf="f.tel.touched && f.tel.invalid" class="alert alert-danger">
+            <div *ngIf="f.tel.errors.required">Telephone is required.</div>
+            <div *ngIf="f.tel.errors.maxlength">Telephone should be max 15 character.</div>
+          </div>
+        </div>
+        <div class="md-form">
+          <input type="text" class="form-control" id="address1" formControlName="add1">
+          <label for="address1">Address1<span class="text-danger">*</span></label>
+        </div>
+        <div *ngIf="f.add1.touched && f.add1.invalid" class="alert alert-danger">
+          <div *ngIf="f.add1.errors.required">Address 1 is required.</div>
+        </div>
+        <div class="md-form">
+          <input type="text" class="form-control" id="address2" required>
+          <label for="address2">Address2 (optional)</label>
+        </div>
+        <div class="md-form">
+          <input type="text" class="form-control" id="city" formControlName="city">
+          <label for="city">City<span class="text-danger">*</span></label>
+          <div *ngIf="f.city.touched && f.city.invalid" class="alert alert-danger">
+            <div *ngIf="f.city.errors.required">City is required.</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Select Country<span class="text-danger">*</span></label>
+          <select class="form-control" (change)="onChangeCountry($event.target.value)" formControlName="country">
+            <option *ngIf="stateInfo == ''" value="-1">--Select Country--</option>
+            <option *ngFor="let country of countryInfo; let i = index" value="{{i}}">{{country.CountryName}}</option>
+          </select>
+          <div *ngIf="f.country.touched && f.country.invalid" class="alert alert-danger">
+            <div *ngIf="f.country.errors.required">Country is required.</div>
+          </div>
+        </div>
+  
+        <div class="form-group">
+          <label>Select State<span class="text-danger">*</span></label>
+          <select class="form-control" (change)="onChangeState($event.target.value)" formControlName="state">
+            <option *ngIf="stateInfo == ''" value="-1">--Select State--</option>
+            <option *ngFor="let state of stateInfo; let j = index" value="{{j}}">{{state.StateName}}</option>
+          </select>
+        </div>
+        <div class="md-form">
+          <input type="number" class="form-control" id="zipcode" formControlName="zcode">
+          <label for="zipcode">Zip<span class="text-danger">*</span></label>
+          <div *ngIf="f.zcode.touched && f.zcode.invalid" class="alert alert-danger">
+            <div *ngIf="f.zcode.errors.required">Zip is required.</div>
+          </div>
+        </div>
+        <button class="btn btn-primary btn-md" id="btn-one" type="submit" [disabled]="!form.valid">Submit</button>
+      </form>
+      <h6><span class="text-danger">*</span>All fields are compulsory.</h6>
+      <h6>Already a user? <a routerLink="">Login here.</a> </h6>
+    </div>
+  </div>
+  <div class="container col-sm-offset-5 mt-3" [hidden]="!form.valid">
+    <h3 align="center">Registration:Confirmation</h3><hr>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">First Name:</li>
+    </ul>
+  </div>
+  
